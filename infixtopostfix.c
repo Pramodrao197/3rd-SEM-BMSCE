@@ -67,11 +67,11 @@ void infixtopostfix(char infix[],char postfix[])
         default:postfix[k++]=symbol;
 
         }}
-        /*while(top!=-1)
+        while(top!=-1)
         {
             postfix[k++]=pop();
 
-        }*/
+        }
 
     }
 
@@ -84,3 +84,4 @@ scanf("%s",infix);
     printf("Postfix Expression:%s",postfix);
     return 0;
 }
+
