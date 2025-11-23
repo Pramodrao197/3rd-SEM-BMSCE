@@ -13,8 +13,6 @@
         }
         ptr = ptr->next;
     }
-
-    // Attach remaining nodes
     if (list1 != NULL)
         ptr->next = list1;
     else
