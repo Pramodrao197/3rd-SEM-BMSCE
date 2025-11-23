@@ -1,0 +1,32 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+struct ListNode* sortList(struct ListNode* head) {
+    if (!head) return NULL;
+
+    int c;
+    struct ListNode* ptr;
+    struct ListNode* temp= NULL;
+
+    do {
+        c= 0;
+        ptr = head;
+
+        while (ptr->next != temp) {
+            if (ptr->val > ptr->next->val) {
+                int swap = ptr->val;
+                ptr->val = ptr->next->val;
+                ptr->next->val = swap;
+                c = 1;
+            }
+            ptr = ptr->next;
+        }
+        temp = ptr;
+    } while (c);
+
+    return head;
+}
