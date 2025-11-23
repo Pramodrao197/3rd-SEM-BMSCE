@@ -1,0 +1,24 @@
+struct ListNode* removeNthFromEnd(struct ListNode* head, int n) {
+    if (head == NULL) return NULL;
+    int length = 0;
+    struct ListNode* temp = head;
+    while (temp != NULL) {
+        temp = temp->next;
+        length++;
+    }
+    int pos = length - n;
+    if (pos == 0) {
+        struct ListNode* ptr = head->next;
+        free(head);
+        return ptr;
+    }
+    temp = head;
+    for (int i = 0; i < pos - 1; i++) {
+        temp = temp->next;
+    }
+    struct ListNode* toDelete = temp->next;
+    temp->next = toDelete->next;
+    free(toDelete);
+
+    return head;
+}
