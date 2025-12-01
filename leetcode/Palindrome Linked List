@@ -1,0 +1,57 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+struct ListNode* clone(struct ListNode* head) {
+    if (!head) return NULL;
+    struct ListNode* newHead = malloc(sizeof(struct ListNode));
+    struct ListNode* p = head;
+    struct ListNode* q = newHead;
+
+    q->val = p->val;
+    p = p->next;
+
+    while (p) {
+        q->next = malloc(sizeof(struct ListNode));
+        q = q->next;
+        q->val = p->val;
+        p = p->next;
+    }
+    q->next = NULL;
+    return newHead;
+}
+
+bool isPalindrome(struct ListNode* head) {
+    if(head==NULL || head->next==NULL)
+        return true;
+
+    // FIX: clone the original list instead of just copying the pointer
+    struct ListNode* head2 = clone(head);
+
+    struct ListNode *curr = head;
+    struct ListNode *next = NULL;
+    struct ListNode *prev = NULL;
+
+    while(curr != NULL) {
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+
+    head = prev;
+    struct ListNode *ptr = head;
+    struct ListNode *ptr1 = head2;
+
+    while(ptr != NULL && ptr1 != NULL) {
+        if(ptr->val != ptr1->val) {
+            return false;
+        }
+        ptr = ptr->next;
+        ptr1 = ptr1->next;
+    }
+    return true;
+}
